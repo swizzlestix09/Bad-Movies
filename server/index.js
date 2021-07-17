@@ -37,9 +37,17 @@ Use the routes below to build your application:
 //OPTION 1: Use regular routes;
 //If you are using OPTION 1, you do not need routes>movieRoutes.js file
 
+// make an axios request to get the official list of genres from themoviedb
+// use this endpoint. you will need your API key from signup: https://api.themoviedb.org/3/genre/movie/list
 app.get("/genres", function(req, res) {
-  // make an axios request to get the official list of genres from themoviedb
-  // use this endpoint. you will need your API key from signup: https://api.themoviedb.org/3/genre/movie/list
+  apiHelpers.getGenres()
+  .then(genres => {
+    res.send(genres)
+  })
+  .catch(err => {
+    console.log(err);
+    res.sendStatus(400);
+  })
 });
 
 app.get("/search", function(req, res) {
